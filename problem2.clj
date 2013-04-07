@@ -1,13 +1,11 @@
-(loop [result #{}]
-  (if (= result #{}) 
-    (conj result 1 2)
-    (do (if (> (last result) 4000000) 
-          (reduce + 
-            (filter 
-              even?  
-              (drop-last result))))
-        (recur (conj result 
-          (reduce + 
-            (drop 
-              (- (count result) 2)) 
-              result))))))
+(loop [result (conj #{} 1 2)]
+  (if (> (last result) 100) 
+      (reduce + 
+        (filter 
+          even?  
+          (drop-last result)))
+      (recur 
+        (conj result 
+          (+ 
+            (last result)
+            (last (drop-last result)))))))
