@@ -11,14 +11,12 @@
 ;              (last result)
 ;              (last (drop-last result)))
 ;            result)))))
-(defn lazy-seq-fib
-  ([] (concat [0 1] (lazy-seq-fib 0 1)))
-  ([a b] 
-    (let [n (+ a b)]
-      (lazy-seq (cons n (lazy-seq-fib b n))))))
+(defn lazy-seq-fib [a b] 
+  (let [n (+ a b)]
+    (lazy-seq (cons n (lazy-seq-fib b n)))))
 
-(defn upper-4000000? [n] (> n 4000000))
+(defn downer-4000000? [n] (< n 4000000))
 
 (reduce +
   (filter even?
-    (take-while upper-4000000? lazy-seq-fib)))
+    (take-while downer-4000000? (lazy-seq-fib 0 1))))
