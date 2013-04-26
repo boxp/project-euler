@@ -7,3 +7,5 @@
   (filter
     #(= 1 (count (factors %)))
     (range 2 (+ 1 x))))
+
+(last (prime-factors 600851475143))
